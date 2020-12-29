@@ -1,12 +1,12 @@
 FROM php:7-cli-alpine
 
-ARG RELEASE_VERSION=9
+ARG RELEASE_VERSION=latest
 
 # Metadata params
 ARG VCS_REF
 ARG BUILD_DATE
 
-ADD https://phar.phpunit.de/phpunit-${RELEASE_VERSION}.phar /bin/phpunit
+ADD https://phar.phpunit.de/phpunit.phar /bin/phpunit
 RUN chmod +x /bin/phpunit && /bin/phpunit --version
 
 COPY entrypoint.sh /entrypoint.sh
