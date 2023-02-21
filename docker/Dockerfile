@@ -7,7 +7,7 @@ ARG RELEASE_VERSION=9.6.3
 # Metadata params
 ARG VCS_REF
 ARG BUILD_DATE
-ARG DIST_URL="https://phar.phpunit.de/phpunit-${RELEASE_VERSION}.phar "
+ARG DIST_URL="https://phar.phpunit.de/phpunit-${RELEASE_VERSION}.phar"
 
 ADD $DIST_URL /usr/bin/phpunit
 RUN chmod +x /usr/bin/phpunit && phpunit --version
