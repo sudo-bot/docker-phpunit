@@ -4,10 +4,10 @@
 # PHPUnit 9 >= PHP 7.3
 # PHPUnit 8	>= PHP 7.2
 # PHPUnit 7	PHP 7.1 - PHP 7.3
-FROM php:8.1-cli-alpine
+FROM php:8.2-cli-alpine
 
 # https://phar.phpunit.de/
-ARG RELEASE_VERSION=9.6.3
+ARG RELEASE_VERSION=10.0.11
 
 # Metadata params
 ARG VCS_REF

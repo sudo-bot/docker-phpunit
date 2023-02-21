@@ -2,7 +2,7 @@ name: Publish Docker image
 on:
     push:
         tags:
-            - "9"
+            - "10"
 
 jobs:
     push_to_registry:
@@ -30,5 +30,5 @@ jobs:
                   # See: https://github.com/docker/buildx/issues/59
                   ACTION: push
                   DOCKER_BUILDKIT: 1
-                  IMAGE_TAG: docker.io/botsudo/phpunit:9
+                  IMAGE_TAG: docker.io/botsudo/phpunit:10
                   PLATFORM: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
