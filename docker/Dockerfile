@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM php:8.1-cli-alpine
 
 ARG RELEASE_VERSION=latest
@@ -5,9 +6,50 @@ ARG RELEASE_VERSION=latest
 # Metadata params
 ARG VCS_REF
 ARG BUILD_DATE
+ARG DIST_URL="https://phar.phpunit.de/phpunit.phar"
 
-ADD https://phar.phpunit.de/phpunit.phar /bin/phpunit
-RUN chmod +x /bin/phpunit && /bin/phpunit --version
+ADD $DIST_URL /usr/bin/phpunit
+RUN chmod +x /usr/bin/phpunit && phpunit --version
+
+COPY <<-EOT /usr/local/share/sbom/phpunit.spdx.json
+{
+    "spdxVersion": "SPDX-2.3",
+    "dataLicense": "CC0-1.0",
+    "SPDXID": "SPDXRef-DOCUMENT",
+    "name": "docker-phpunit",
+    "packages": [
+        {
+            "name": "phpunit",
+            "SPDXID": "SPDXRef-Package-phpunit",
+            "versionInfo": "${VERSION}",
+            "originator": "Person: Deon George",
+            "downloadLocation": "${DIST_URL}",
+            "sourceInfo": "dowloaded from phpunit.de phars",
+            "licenseConcluded": "BSD-3-Clause",
+            "licenseDeclared": "BSD-3-Clause",
+            "copyrightText": "NOASSERTION",
+            "description": "phpunit"
+        }
+    ],
+    "externalRefs": [
+        {
+            "referenceCategory": "SECURITY",
+            "referenceLocator": "cpe:2.3:a:phpunit_project:phpunit",
+            "referenceType": "cpe23Type"
+        },
+        {
+            "referenceCategory": "SECURITY",
+            "referenceLocator": "cpe:/a:phpunit_project:phpunit",
+            "referenceType": "cpe22Type"
+        },
+        {
+            "referenceCategory": "PACKAGE_MANAGER",
+            "referenceLocator": "pkg:deb/debian/phpunit",
+            "referenceType": "purl"
+        }
+    ]
+}
+EOT
 
 COPY entrypoint.sh /entrypoint.sh
 
