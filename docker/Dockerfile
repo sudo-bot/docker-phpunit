@@ -7,7 +7,7 @@
 FROM php:7.4-cli-alpine
 
 # https://phar.phpunit.de/
-ARG RELEASE_VERSION=8.5.9
+ARG RELEASE_VERSION=8.5.29
 
 # Metadata params
 ARG VCS_REF
