@@ -1,9 +1,28 @@
+IMAGE_TAG ?= docker-phpunit
+
+# All: linux/amd64,linux/arm64,linux/riscv64,linux/ppc64le,linux/s390x,linux/386,linux/mips64le,linux/mips64,linux/arm/v7,linux/arm/v6
+PLATFORM ?= linux/amd64
+
+ACTION ?= load
+PROGRESS_MODE ?= plain
+
 .PHONY: update-tags docker-build
 
 docker-build:
-	docker build ./docker \
+	# https://github.com/docker/buildx#building
+	docker buildx build \
 		--build-arg VCS_REF=`git rev-parse HEAD` \
-		--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+		--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+		--tag $(IMAGE_TAG) \
+		--progress $(PROGRESS_MODE) \
+		--platform $(PLATFORM) \
+		--pull \
+		--$(ACTION) \
+		./docker
+
+docker-test:
+	docker run --rm ${IMAGE_TAG} --version
+	docker run --rm ${IMAGE_TAG} --help
 
 update-tags:
 	git checkout 7
