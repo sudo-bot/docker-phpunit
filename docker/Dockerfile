@@ -66,7 +66,7 @@ LABEL org.label-schema.vendor="Sudo-Bot" \
     \
     com.docker.extension.publisher-url="https://github.com/sudo-bot" \
     \
-    org.opencontainers.image.title="Docker phpunit server" \
+    org.opencontainers.image.title="Docker phpunit" \
     org.opencontainers.image.authors="williamdes@wdes.fr" \
     org.opencontainers.image.url="https://github.com/sudo-bot/docker-phpunit#readme" \
     org.opencontainers.image.documentation="https://github.com/sudo-bot/docker-phpunit#readme" \
