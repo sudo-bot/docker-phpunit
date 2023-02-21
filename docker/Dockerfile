@@ -1,4 +1,4 @@
-FROM php:7-cli-alpine
+FROM php:8.1-cli-alpine
 
 ARG RELEASE_VERSION=latest
 
