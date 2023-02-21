@@ -6,7 +6,7 @@ PLATFORM ?= linux/amd64
 ACTION ?= load
 PROGRESS_MODE ?= plain
 
-.PHONY: update-tags docker-build
+.PHONY: update-tags docker-build docker-test
 
 docker-build:
 	# https://github.com/docker/buildx#building
@@ -37,6 +37,10 @@ update-tags:
 	git tag -s -f -a -m "9.x.x series" 9
 	git checkout -
 	git push origin refs/tags/9 -f
+	git checkout 10
+	git tag -s -f -a -m "10.x.x series" 10
+	git checkout -
+	git push origin refs/tags/10 -f
 	git checkout main
 	git tag -s -f -a -m "latest series" latest
 	git checkout -
