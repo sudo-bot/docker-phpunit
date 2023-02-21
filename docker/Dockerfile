@@ -22,7 +22,7 @@ COPY <<-EOT /usr/local/share/sbom/phpunit.spdx.json
             "name": "phpunit",
             "SPDXID": "SPDXRef-Package-phpunit",
             "versionInfo": "${VERSION}",
-            "originator": "Person: Deon George",
+            "originator": "Person: Sebastian Bergmann",
             "downloadLocation": "${DIST_URL}",
             "sourceInfo": "dowloaded from phpunit.de phars",
             "licenseConcluded": "BSD-3-Clause",
