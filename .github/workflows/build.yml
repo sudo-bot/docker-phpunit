@@ -1,9 +1,19 @@
 name: Build and test container
+
+permissions:
+    contents: read
+
 on: [push]
 
 jobs:
-    build:
+    build-image:
         runs-on: ubuntu-latest
+        name: Build and test docker image (${{ matrix.platform }})
+        strategy:
+            fail-fast: false
+            matrix:
+                # linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/ppc64le,linux/s390x
+                platform: ["linux/amd64", "linux/arm/v7", "linux/arm64/v8"]
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
@@ -13,9 +23,12 @@ jobs:
             # https://github.com/docker/setup-buildx-action
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v2
-            - name: Build image
+            - name: Build docker image
               run: make docker-build
               env:
                   DOCKER_BUILDKIT: 1
-            - name: Test image
+                  PLATFORM: "${{ matrix.platform }}"
+            - name: Test docker image
               run: make test
+              env:
+                  PLATFORM: "${{ matrix.platform }}"
