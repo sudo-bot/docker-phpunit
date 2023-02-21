@@ -1,7 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM php:8.1-cli-alpine
 
-ARG RELEASE_VERSION=9
+# https://phar.phpunit.de/
+ARG RELEASE_VERSION=9.6.3
 
 # Metadata params
 ARG VCS_REF
