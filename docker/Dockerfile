@@ -4,7 +4,7 @@
 # PHPUnit 9 >= PHP 7.3
 # PHPUnit 8	>= PHP 7.2
 # PHPUnit 7	PHP 7.1 - PHP 7.3
-FROM php:8.1-cli-alpine
+FROM php:8-cli-alpine
 
 ARG RELEASE_VERSION=latest
 
